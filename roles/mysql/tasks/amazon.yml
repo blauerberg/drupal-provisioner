@@ -1,0 +1,13 @@
+---
+- name: Install Mysql package
+  package: name={{ item }} state=present
+  with_items:
+    - mysql
+    - mysql-server
+    - MySQL-python27
+
+- name: Copy server config
+  template: src=server.cnf.j2 dest=/etc/my.cnf owner=root mode=0644
+
+- name: Start Mysql Service
+  service: name=mysqld state=started enabled=yes

@@ -1,0 +1,4 @@
+---
+nginx_vhost_path: /etc/nginx/conf.d
+nginx_server_name: localhost
+nginx_reject_unexpected_server_name: false

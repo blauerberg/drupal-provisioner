@@ -1,0 +1,72 @@
+---
+- name: Remove default php package
+  package: name={{ item }} state=removed
+  with_items:
+    - php
+
+- name: Install php56 and deps 
+  package: name={{ item }} state=present
+  with_items:
+    - php56
+    - php56-cli
+    - php56-fpm
+    - php56-mbstring
+    - php56-xml
+    - php56-gd
+    - php56-mysqlnd
+    - php56-jsonc
+    - php56-mcrypt
+    - php56-ldap
+    - php56-opcache
+    - php56-pecl-apcu
+  when: php_version == "5.6"
+
+- name: Install php70 and deps 
+  package: name={{ item }} state=present
+  with_items:
+    - php70
+    - php70-fpm
+    - php70-cli
+    - php70-mbstring
+    - php70-xml
+    - php70-gd
+    - php70-mysqlnd
+    - php70-json
+    - php70-mcrypt
+    - php70-ldap
+    - php70-opcache
+    - php70-pecl-apcu
+  when: php_version == "7.0"
+
+- name: Install php71 and deps 
+  package: name={{ item }} state=present
+  with_items:
+    - php71
+    - php71-cli
+    - php71-mbstring
+    - php71-xml
+    - php71-gd
+    - php71-mysqlnd
+    - php71-json
+    - php71-mcrypt
+    - php71-ldap
+    - php71-opcache
+    - php71-pecl-apcu
+  when: php_version == "7.1"
+
+- name: Install php72 and deps 
+  package: name={{ item }} state=present
+  with_items:
+    - php72
+    - php72-fpm
+    - php72-cli
+    - php72-mbstring
+    - php72-xml
+    - php72-gd
+    - php72-mysqlnd
+    - php72-json
+    - php72-mcrypt
+    - php72-ldap
+    - php72-opcache
+    - php72-pecl-apcu
+  when: php_version == "7.2"

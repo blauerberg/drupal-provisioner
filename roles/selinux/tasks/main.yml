@@ -1,0 +1,4 @@
+---
+- include_tasks: redhat.yml
+  become: yes
+  when: ansible_os_family == 'RedHat' and ansible_distribution != 'Amazon'

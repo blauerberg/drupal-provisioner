@@ -1,0 +1,5 @@
+---
+composer_global_packages:
+  - { name: hirak/prestissimo }
+composer_global_configs:
+  - "repos.packagist composer https://packagist.jp"

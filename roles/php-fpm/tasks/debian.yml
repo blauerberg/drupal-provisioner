@@ -1,0 +1,17 @@
+---
+- name: Install php70 and deps 
+  package: name={{ item }} state=present
+  with_items:
+    - php
+    - php-cli
+    - php-curl
+    - php-mbstring
+    - php-xml
+    - php-gd
+    - php-mysqlnd
+    - php-json
+    - php-mcrypt
+    - php-ldap
+    - php-opcache
+    - php-apcu
+    - php-zip

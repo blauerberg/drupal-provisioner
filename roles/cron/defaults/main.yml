@@ -1,0 +1,8 @@
+---
+cron_jobs: []
+# cron_jobs:
+#   - {
+#     name: "Drupal Cron",
+#     minute: "*/30",
+#     job: "{{ drush_path }} -r {{ drupal_root_path }} core-cron"
+#   }

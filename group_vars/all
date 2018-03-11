@@ -1,0 +1,4 @@
+---
+# Extra packages you would like installed.
+extra_packages:
+  - gitflow

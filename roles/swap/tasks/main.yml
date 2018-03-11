@@ -1,0 +1,11 @@
+---
+- stat: path={{ swap_path }}
+  register: swap
+
+- block:
+  - command: dd if=/dev/zero of=/var/swap count={{ swap_count }} bs={{ swap_bs }}
+  - command: chmod 600 {{ swap_path }}
+  - command: mkswap {{ swap_path }}
+  - command: swapon {{ swap_path }}
+  when: not swap.stat.exists and ansible_swaptotal_mb < 1
+  become: yes

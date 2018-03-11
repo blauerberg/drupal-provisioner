@@ -1,0 +1,30 @@
+---
+- name: Enable epel repository
+  package: name=epel-release state=present
+  when: ansible_os_family == 'RedHat'
+
+- name: Install base packages
+  package: name={{ item }} state=present
+  with_items: "{{ install_packages_common }}"
+  become: yes
+
+- name: Install bash-completion
+  package: name={{ item }} state=present
+  with_items: "{{ install_packages_amazon }}"
+  when: ansible_distribution != 'Amazon'
+  become: yes
+
+- name: Prevent ssh login with password
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: present
+    regexp: "^PasswordAuthentication yes"
+    line: "PasswordAuthentication no"
+    backrefs: yes
+  notify: restart sshd
+  become: yes
+
+- name: Install extra packages
+  package: name={{ item }} state=present
+  with_items: "{{ install_packages_extra }}"
+  become: yes

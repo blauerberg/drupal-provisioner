@@ -1,0 +1,44 @@
+---
+drupal_root_path: /var/www/html
+drupal_version: 7.57
+drupal_major_version: 7
+drupal_database_host: localhost
+drupal_database_name: drupal
+drupal_database_user: drupal
+drupal_database_password: drupal
+drupal_site_install: true
+drupal_site_install_profile: standard
+drupal_site_install_extra_args: []
+drupal_site_install_locale: en
+drupal_site_name: "Drupal"
+drupal_account_name: admin
+drupal_account_pass: admin
+drupal_extra_modules:
+  - admin_menu
+  - admin_views
+  - ctools
+  - date
+  - devel
+  - ds
+  - email
+  - entity
+  - entityreference
+  - extlink
+  - field_group
+  - jquery_update
+  - l10n_update
+  - libraries
+  - link
+  - markdown
+  - masquerade
+  - node_clone
+  - panels
+  - rules
+  - token
+  - views
+  - views_bulk_operations
+  - webform
+drupal_enable_modules:
+  - devel
+drupal_disable_modules:
+  - overlay

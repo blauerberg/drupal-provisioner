@@ -1,0 +1,8 @@
+---
+firewalld_zone: public
+firewalld_allowed_ports:
+  - "22/tcp"
+  - "80/tcp"
+  - "443/tcp"
+  - "8025/tcp"
+  - "9000/tcp"

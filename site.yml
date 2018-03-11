@@ -1,0 +1,24 @@
+---
+- name: Install Drupal environment
+  hosts: all
+
+  vars_files:
+    - config.yml
+
+  roles:
+    - swap
+    - selinux
+    - yum_cron
+    - firewalld
+    - common
+    - nginx
+    - php-fpm
+    - composer
+    - mysql
+    - drush
+    - drupal
+    - awscli
+    - nodejs
+    #- openjdk
+    #- solr4drupal
+    - cron

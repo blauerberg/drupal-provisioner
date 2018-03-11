@@ -1,0 +1,16 @@
+---
+install_packages_common:
+  - zsh
+  - tmux
+  - git
+  - unzip
+  - rsync
+  - vim
+  - htop
+
+install_packages_amazon:
+  - cpulimit
+  - bash-completion
+
+install_packages_extra:
+  - gitflow

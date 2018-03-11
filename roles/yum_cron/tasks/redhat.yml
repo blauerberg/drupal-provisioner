@@ -1,0 +1,21 @@
+---
+- name: Install yum-cron
+  package: name=yum-cron state=present
+
+# update only security
+- name: Initialize yum-cron.conf
+  lineinfile:
+    dest: /etc/yum/yum-cron.conf
+    state: present
+    regexp: "^update_cmd = default$"
+    line: "update_cmd = {{ yum_cron_update_cmd }}"
+    backrefs: yes
+
+# enable auto update
+- name: Initialize yum-cron.conf
+  lineinfile:
+    dest: /etc/yum/yum-cron.conf
+    state: present
+    regexp: "^apply_updates = no$"
+    line: "apply_updates = {{ yum_cron_apply_updates }}"
+    backrefs: yes

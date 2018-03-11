@@ -1,0 +1,35 @@
+---
+php_version: "5.6"
+php_fpm_listen: /var/run/php-fpm/php-fpm.sock
+php_fpm_listen_allowed_clients: 127.0.0.1
+php_fpm_listen_owner: nginx
+php_fpm_listen_group: nginx
+php_fpm_user: nginx
+php_fpm_group: nginx
+php_fpm_pm: dynamic
+php_fpm_pm_max_children: 50
+php_fpm_pm_start_servers: 5
+php_fpm_pm_min_spare_servers: 5
+php_fpm_pm_max_spare_servers: 35
+php_fpm_catch_workers_output: yes
+php_fpm_slowlog: /var/log/php-fpm/slowlog.log
+php_fpm_request_slowlog_timeout: 60
+php_fpm_request_terminate_timeout: 300
+php_fpm_php_session_save_handler: files
+php_fpm_php_session_save_path: /var/lib/php/session
+
+php_fpm_php_admin_value:
+  - error_log: /var/log/php-fpm/www-error.log
+php_fpm_php_value:
+  - memory_limit: 2048M
+  - post_max_size: 160M
+  - upload_max_filesize: 128M
+  - apc.shm_size: 128M
+  - apc.entries_hint: 16384
+  - apc.ttl: 7200
+  - opcache.enable: 1
+  - opcache.memory_consumption: 256
+  - opcache.max_accelerated_files: 100000
+  - opcache.interned_strings_buffer: 8
+  - opcache.revalidate_freq: 10
+  - opcache.fast_shutdown: 1
