@@ -1,7 +1,7 @@
 ---
 - name: Enable epel repository
   package: name=epel-release state=present
-  when: ansible_os_family == 'RedHat'
+  when: ansible_os_family == 'RedHat' and ansible_distribution == 'CentOS'
 
 - name: Install base packages
   package: name={{ item }} state=present
