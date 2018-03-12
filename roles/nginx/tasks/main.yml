@@ -23,3 +23,7 @@
   template: src=drupal.conf.j2 dest={{ nginx_vhost_path }}/{{ nginx_server_name }}.conf
   notify: restart nginx
   become: yes
+
+- name: Enable nginx service
+  command: systemctl enable nginx
+
