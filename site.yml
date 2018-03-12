@@ -6,19 +6,19 @@
     - config.yml
 
   roles:
-    - swap
-    - selinux
-    - yum_cron
-    - firewalld
-    - common
-    - nginx
-    - php-fpm
-    - composer
-    - mysql
-    - drush
-    - drupal
-    - awscli
-    - nodejs
-    #- openjdk
-    #- solr4drupal
-    - cron
+    - { role: swap, when: '"swap" in install_features' }
+    - { role: selinux, when: '"selinux" in install_features' }
+    - { role: yum_cron, when: '"yum_cron" in install_features' }
+    - { role: firewalld, when: '"firewalld" in install_features' }
+    - { role: common, when: '"common" in install_features' }
+    - { role: nginx, when: '"nginx" in install_features' }
+    - { role: php-fpm, when: '"php-fpm" in install_features' }
+    - { role: composer, when: '"composer" in install_features' }
+    - { role: mysql, when: '"mysql" in install_features' }
+    - { role: drush, when: '"drush" in install_features' }
+    - { role: drupal, when: '"drupal" in install_features' }
+    - { role: awscli, when: '"awscli" in install_features' }
+    - { role: nodejs, when: '"nodejs" in install_features' }
+    - { role: openjdk, when: '"openjdk" in install_features' }
+    - { role: solr4drupal, when: '"solr4drupal" in install_features' }
+    - { role: cron, when: '"cron" in install_features' }
