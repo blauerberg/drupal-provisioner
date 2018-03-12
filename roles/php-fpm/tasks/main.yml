@@ -39,5 +39,4 @@
     template: src=www.conf.j2 dest=/etc/php-fpm.d/www.conf
     notify: restart php-fpm
     become: yes
-    when: "disabled"
   when: ansible_distribution != 'RedHat'
