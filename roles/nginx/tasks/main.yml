@@ -26,4 +26,5 @@
 
 - name: Enable nginx service
   command: systemctl enable nginx
+  become: yes
 
