@@ -1,35 +1,65 @@
 ---
-- name: Enable remi repository
-  package: name=http://rpms.famillecollet.com/enterprise/remi-release-7.rpm state=present
-
-- name: Enable remi repo for PHP 5.6.
-  set_fact: php_enablerepo="remi-php56"
+- name: set package prefix for PHP 5.6.
+  set_fact: php_package_prefix="rh-php56"
   when: php_version == "5.6"
 
-- name: Enable remi repo for PHP 7.0.
-  set_fact: php_enablerepo="remi-php70"
+- name: set package prefix for PHP 7.0.
+  set_fact: php_package_prefix="rh-php70"
   when: php_version == "7.0"
 
-- name: Enable remi repo for PHP 7.1.
-  set_fact: php_enablerepo="remi-php71"
+- name: set package prefix for PHP 7.1.
+  set_fact: php_package_prefix="rh-php71"
   when: php_version == "7.1"
 
-- name: Enable remi repo for PHP 7.2.
-  set_fact: php_enablerepo="remi-php72"
+- name: set package prefix for PHP 7.2.
+  set_fact: php_package_prefix="rh-php72"
   when: php_version == "7.2"
 
 - name: Install php-fpm and deps 
-  package: name={{ item }} state=present enablerepo={{ php_enablerepo }}
+  package: name={{ item }} state=present
   with_items:
-    - php
-    - php-cli
-    - php-mbstring
-    - php-fpm
-    - php-xml
-    - php-gd
-    - php-mysqlnd
-    - php-json
-    - php-mcrypt
-    - php-ldap
-    - php-opcache
-    - php-apcu
+    - "{{ php_package_prefix }}-php-cli"
+    - "{{ php_package_prefix }}-php-mbstring"
+    - "{{ php_package_prefix }}-php-fpm"
+    - "{{ php_package_prefix }}-php-xml"
+    - "{{ php_package_prefix }}-php-gd"
+    - "{{ php_package_prefix }}-php-mysqlnd"
+    - "{{ php_package_prefix }}-php-json"
+    - "{{ php_package_prefix }}-php-ldap"
+    - "{{ php_package_prefix }}-php-opcache"
+
+
+- name: mkdir for unix domain docket
+  file: path=/var/run/php-fpm state=directory owner=root group=root mode=0755
+  
+- name: Check if php-fpm is enabled
+  command: systemctl is-enabled {{ php_package_prefix }}-php-fpm
+  register: php_fpm_is_enabled
+  changed_when: False
+  ignore_errors: True # FIXME
+
+- block:
+    - name: Change owner for session directory
+      file:
+        path: "{{ php_fpm_php_session_save_path }}"
+        group: "{{ php_fpm_group }}"
+        owner: "{{ php_fpm_user }}"
+      when: php_fpm_php_session_save_handler == "files"
+    
+    - name: Enable php-fpm
+      command: systemctl enable {{ php_package_prefix }}-php-fpm
+  become: yes
+  when: php_fpm_is_enabled.stdout == "disabled"
+
+- name: Copy php-fpm configuration
+  template: src=www.conf.j2 dest=/etc/opt/rh/{{ php_package_prefix }}/php-fpm.d/www.conf
+  notify: restart {{ php_package_prefix }}-php-fpm
+  become: yes
+
+- name: Add redhat php binaries to $PATH.
+  copy:
+    dest: /etc/profile.d/rhscl-php.sh
+    content: 'export PATH=/opt/rh/{{ php_package_prefix }}/root/bin:$PATH'
+
+- name: create /usr/bin/php as symlink
+  file: src=/opt/rh/{{ php_package_prefix }}/root/bin/php dest=/usr/bin/php state=link

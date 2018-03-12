@@ -2,3 +2,19 @@
 - name: restart php-fpm
   service: name=php-fpm state=restarted
   become: yes
+
+- name: restart rh-php56-php-fpm
+  service: name=rh-php56-php-fpm state=restarted
+  become: yes
+
+- name: restart rh-php70-php-fpm
+  service: name=rh-php70-php-fpm state=restarted
+  become: yes
+
+- name: restart rh-php71-php-fpm
+  service: name=rh-php71-php-fpm state=restarted
+  become: yes
+
+- name: restart rh-php72-php-fpm
+  service: name=rh-php72-php-fpm state=restarted
+  become: yes
