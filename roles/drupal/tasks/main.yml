@@ -38,7 +38,6 @@
 
   - name: Create Drupal database
     mysql_db: name={{ drupal_database_name }} state=present
-    become: yes
   
   - name: Create Drupal database user
     mysql_user:
@@ -47,7 +46,6 @@
       priv: "{{ drupal_database_name }}.*:ALL"
       host: "{{ drupal_database_host }}"
       state: present
-    become: yes
   
   - name: Install Drupal with drush.
     command: >
