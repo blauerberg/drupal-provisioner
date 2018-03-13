@@ -6,6 +6,7 @@
     - config.yml
 
   roles:
+    - { role: timezone, when: '"timezone" in install_features' }
     - { role: swap, when: '"swap" in install_features' }
     - { role: selinux, when: '"selinux" in install_features' }
     - { role: yum_cron, when: '"yum_cron" in install_features' }
