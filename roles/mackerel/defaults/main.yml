@@ -1,0 +1,5 @@
+---
+mackerel_hosts: all
+mackerel_agent_apikey: "12345"
+mackerel_agent_roles:
+  - "Service:drupal"

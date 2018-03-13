@@ -23,3 +23,4 @@
     - { role: openjdk, when: '"openjdk" in install_features' }
     - { role: solr4drupal, when: '"solr4drupal" in install_features' }
     - { role: cron, when: '"cron" in install_features' }
+    - { role: mackerel, when: '"mackerel" in install_features' }
