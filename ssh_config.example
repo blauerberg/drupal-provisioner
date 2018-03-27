@@ -1,0 +1,6 @@
+Host default
+  User your_username
+  HostName your_host_ip
+  IdentityFile ~/.ssh/id_rsa
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
