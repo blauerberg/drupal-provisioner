@@ -1,3 +1,0 @@
-[submodule "roles/ansible-mackerel-agent"]
-	path = roles/ansible-mackerel-agent
-	url = https://github.com/mackerelio/ansible-mackerel-agent.git

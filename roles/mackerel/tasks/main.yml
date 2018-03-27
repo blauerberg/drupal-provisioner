@@ -1,7 +1,0 @@
----
-- hosts: {{ mackerel_hosts }}
-  vars:
-    - mackerel_agent_apikey: {{ mackerel_agent_apikey }}
-    - mackerel_agent_roles: {{ mackerel_agent_roles }}
-  roles:
-    - mackerel-agent
