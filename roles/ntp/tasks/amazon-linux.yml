@@ -1,0 +1,29 @@
+---
+  - name: Install ntp
+    package:
+      name: ntp
+      state: present
+    become: yes
+  
+  - name: enable ntpd service
+    service:
+      name: ntpd
+      enabled: true
+    become: yes
+  
+  # - name: disable default pool
+  #   lineinfile:
+  #     dest: /etc/ntp.conf
+  #     regexp: '^pool .*ubuntu'
+  #     state: absent
+  #     backup: true
+  #   become: yes
+  
+  # - name: set pool
+  #   lineinfile:
+  #     dest: /etc/ntp.conf
+  #     line: "pool {{ ntp_pool_server }} iburst"
+  #     backup: true
+  #   notify:
+  #     - restart ntp
+  #   become: yes
