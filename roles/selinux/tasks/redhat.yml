@@ -1,3 +1,4 @@
 ---
 - name: set state of selinux
   selinux: state={{ selinux_state }}
+  become: yes

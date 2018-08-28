@@ -1,16 +1,21 @@
 ---
 - name: Install firewalld
   package: name=firewalld state=present
+  become: yes
 
 - name: Start firewalld
   service: name=firewalld state=started enabled=yes
+  become: yes
 
 - name: Setup firewalld
   firewalld: port={{ item }} permanent=true zone={{ firewalld_zone }} state=enabled
   with_items: "{{ firewalld_allowed_ports }}"
+  become: yes
 
 - name: Reload firewalld
   command: firewall-cmd --reload
+  become: yes
 
 - name: Enable firewalld
   command: systemctl enable firewalld
+  become: yes
