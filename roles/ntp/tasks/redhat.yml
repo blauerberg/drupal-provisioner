@@ -3,13 +3,11 @@
     package:
       name: ntp
       state: present
-    become: yes
   
   - name: enable ntpd service
     service:
       name: ntpd
       enabled: true
-    become: yes
   
   # - name: disable default pool
   #   lineinfile:
@@ -17,7 +15,6 @@
   #     regexp: '^pool .*ubuntu'
   #     state: absent
   #     backup: true
-  #   become: yes
   
   # - name: set pool
   #   lineinfile:
@@ -26,4 +23,3 @@
   #     backup: true
   #   notify:
   #     - restart ntp
-  #   become: yes

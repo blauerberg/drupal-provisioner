@@ -11,4 +11,3 @@
   - file: src=/usr/local/src/drush/drush dest={{ drush_path }} state=link
   - command: "{{ drush_path }} init -y"
   when: not drush.stat.exists
-  become: yes

@@ -1,18 +1,14 @@
 ---
 - include_tasks: centos.yml
-  become: yes
   when: ansible_os_family == 'RedHat' and ansible_distribution == 'CentOS'
 
 - include_tasks: redhat.yml
-  become: yes
   when: ansible_os_family == 'RedHat' and ansible_distribution == 'RedHat'
 
 - include_tasks: amazon-linux.yml
-  become: yes
   when: ansible_distribution == 'Amazon'
 
 - include_tasks: debian.yml
-  become: yes
   when: ansible_os_family == 'Debian'
 
 - block:
@@ -32,11 +28,9 @@
       
       - name: Enable php-fpm
         command: systemctl enable php-fpm
-    become: yes
     when: php_fpm_is_enabled.stdout == "disabled"
 
   - name: Copy php-fpm configuration
     template: src=www.conf.j2 dest=/etc/php-fpm.d/www.conf
     notify: restart php-fpm
-    become: yes
   when: ansible_distribution != 'RedHat'

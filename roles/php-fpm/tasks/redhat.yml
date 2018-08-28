@@ -48,13 +48,11 @@
     
     - name: Enable php-fpm
       command: systemctl enable {{ php_package_prefix }}-php-fpm
-  become: yes
   when: php_fpm_is_enabled.stdout == "disabled"
 
 - name: Copy php-fpm configuration
   template: src=www.conf.j2 dest=/etc/opt/rh/{{ php_package_prefix }}/php-fpm.d/www.conf
   notify: restart {{ php_package_prefix }}-php-fpm
-  become: yes
 
 - name: Add redhat php binaries to $PATH.
   copy:

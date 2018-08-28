@@ -8,7 +8,6 @@
 - name: Create root directory for drupal.
   file: path={{ drupal_root_path }} state=directory owner=nginx group=nginx mode=0755
   when: not parent_dir.stat.exists
-  become: yes
 
 - name: Check if site is already installed.
   command: >
@@ -34,7 +33,6 @@
   
   - name: Move archive
     shell: mv /tmp/drupal-{{ drupal_version }}/* {{ drupal_root_path }}
-    become: yes
 
   - name: Create Drupal database
     mysql_db: name={{ drupal_database_name }} state=present
@@ -62,7 +60,6 @@
   - name: Install modules for drupal
     shell: chdir={{ drupal_root_path }} {{ drush_path }} -y --default-major={{ drupal_major_version }} dl {{ item }}
     with_items: "{{ drupal_extra_modules }}"
-    become: yes
   
   - name: Enable modules for drupal
     shell: chdir={{ drupal_root_path }} {{ drush_path }} -y en {{ item }}
@@ -74,6 +71,5 @@
 
   - name: Change ownership of Drupal installation
     file: path={{ drupal_root_path }} owner=nginx group=nginx state=directory recurse=yes
-    become: yes
   
   when: "'Successful' not in drupal_site_installed.stdout and drupal_site_install == true"

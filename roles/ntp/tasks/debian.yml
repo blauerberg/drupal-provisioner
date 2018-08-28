@@ -3,10 +3,8 @@
     package:
       name: ntp
       state: present
-    become: yes
   
   - name: enable ntp service
     service:
       name: ntp
       enabled: true
-    become: yes

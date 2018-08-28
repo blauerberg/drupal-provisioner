@@ -1,30 +1,24 @@
 ---
 - name: Install nginx
   package: name=nginx state=present
-  become: yes
 
 - name: Delete default configuration
   file: path=/etc/nginx/conf.d/{{ item }} state=absent
   with_items:
     - default.conf
     - example_ssl.conf
-  become: yes
 
 - name: Copy nginx base configuration
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
-  become: yes
 
 - name: Copy nginx fallback configuration
   template: src=default.conf.j2 dest=/etc/nginx/conf.d/default.conf
-  become: yes
   when: nginx_reject_unexpected_server_name == true
 
 - name: Copy nginx configuration for Drupal
   template: src=drupal.conf.j2 dest={{ nginx_vhost_path }}/{{ nginx_server_name }}.conf
   notify: restart nginx
-  become: yes
 
 - name: Enable nginx service
   command: systemctl enable nginx
-  become: yes
 

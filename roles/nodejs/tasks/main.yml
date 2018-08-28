@@ -18,4 +18,3 @@
       npm: name={{ item }} global=yes state=present
       with_items: "{{ nodejs_npm_global_packages }}"
   when: not node.stat.exists
-  become: yes

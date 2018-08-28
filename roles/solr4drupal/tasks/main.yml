@@ -10,11 +10,9 @@
 
   - name: Create root directory for tika.
     file: path={{ tika_install_path }} state=directory owner=root group=root mode=0755
-    become: yes
 
   - name: Move Tika App
     shell: mv /tmp/tika-app-{{ tika_version }}.jar {{ tika_install_path }}
-    become: yes
 
   when: not tika.stat.exists
 
@@ -39,7 +37,6 @@
   
   - name: Move solr distribution
     shell: mv /tmp/solr-{{ solr_version }} {{ solr_install_path }}
-    become: yes
 
   - name: Download Apache Solr module to get scheme for Drupal
     get_url:
@@ -66,7 +63,6 @@
     #with_fileglob:
     #  - "{{ solr_install_path }}/core/solr/collection1/conf/*"
     shell: /bin/rm -rf {{ solr_install_path }}/core/solr/collection1/conf/*
-    become: yes
 
   - name: Copy solr configuration for Drupal
     #copy:
@@ -75,14 +71,12 @@
     #with_fileglob:
     #  - "/tmp/apachesolr/solr-conf/solr-4.x/*"
     shell: cp -f /tmp/apachesolr/solr-conf/solr-4.x/* {{ solr_install_path }}/core/solr/collection1/conf/
-    become: yes
 
   - name: Set startup script
     template:
       src: "startup.sh.j2"
       dest: "{{ solr_install_path }}/core/startup.sh"
       mode: "0755"
-    become: yes
   
   - name: Configure service
     template:
@@ -91,7 +85,6 @@
       mode: "0640"
     with_items:
       - "etc/systemd/system/solr.service"
-    become: yes
     when: ansible_os_family == 'RedHat' and ansible_distribution != 'Amazon'
 
   - name: Configure init script
@@ -99,7 +92,6 @@
       src: "etc/init.d/solr.j2"
       dest: "/etc/init.d/solr"
       mode: "0755"
-    become: yes
     when: ansible_distribution == 'Amazon'
   
   - name: Start service
@@ -107,4 +99,3 @@
       name: solr
       state: started
       enabled: yes
-    become: yes

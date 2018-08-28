@@ -7,12 +7,9 @@
     - command: "php composer-setup.php --install-dir=/usr/bin --filename=composer"
     - command: "php -r \"unlink('composer-setup.php');\""
   when: not composer.stat.exists
-  become: yes
 
 - command: "composer global require {{ item.name }}:{{ item.release | default('@stable') }} --no-progress"
   with_items: "{{ composer_global_packages }}"
-  become: yes
 
 - command: "composer config -g {{ item }}"
   with_items: "{{ composer_global_configs }}"
-  become: yes

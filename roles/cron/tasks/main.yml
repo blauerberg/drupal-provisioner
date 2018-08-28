@@ -12,4 +12,3 @@
     user: "{{ item.user | default('root') }}"
   with_items: "{{ cron_jobs }}"
   when: cron_jobs is defined
-  become: yes

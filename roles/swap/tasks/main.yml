@@ -8,4 +8,3 @@
   - command: mkswap {{ swap_path }}
   - command: swapon {{ swap_path }}
   when: not swap.stat.exists and ansible_swaptotal_mb < 1
-  become: yes
