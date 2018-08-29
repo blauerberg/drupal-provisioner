@@ -2,7 +2,7 @@
 - name: Install Mysql package
   package: name={{ item }} state=present
   with_items:
-    - mysql
+    - mysql-client
     - mysql-server
     - python-mysqldb
 
