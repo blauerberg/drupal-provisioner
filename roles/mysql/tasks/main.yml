@@ -16,11 +16,11 @@
     login_user: root
 
 - name: copy .my.cnf
-  template: src=.my.cnf.j2 dest="/home/{{ lookup('env','USER') }}/.my.cnf" owner="{{ lookup('env','USER') }}" mode=0600
+  template: src=.my.cnf.j2 dest="/root/.my.cnf" owner="root" mode=0600
 
 - name: update password in .my.cnf
   lineinfile:
-    dest: "/home/{{ lookup('env','USER') }}/.my.cnf"
+    dest: "/root/.my.cnf"
     state: present
     regexp: "^password =*"
     line: "password = {{ mysql_root_password }}"
