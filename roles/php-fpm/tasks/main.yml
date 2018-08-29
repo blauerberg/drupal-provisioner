@@ -37,5 +37,5 @@
 
   - name: Copy php-fpm configuration
     template: src=www.conf.j2 dest=/etc/php/{{ php_version }}/fpm/pool.d/www.conf
-    notify: restart php-fpm
+    notify: restart php7.0-fpm
     when: ansible_os_family == 'Debian'
