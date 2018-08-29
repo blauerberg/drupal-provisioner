@@ -6,7 +6,7 @@
   register: parent_dir
 
 - name: Create root directory for drupal.
-  file: path={{ drupal_root_path }} state=directory owner=nginx group=nginx mode=0755
+  file: path={{ drupal_root_path }} state=directory owner={{ nginx_user }} group={{ nginx_user }} mode=0755
   when: not parent_dir.stat.exists
 
 - name: Check if site is already installed.
@@ -70,6 +70,6 @@
     with_items: "{{ drupal_disable_modules }}"
 
   - name: Change ownership of Drupal installation
-    file: path={{ drupal_root_path }} owner=nginx group=nginx state=directory recurse=yes
+    file: path={{ drupal_root_path }} owner={{ nginx_user }} group={{ nginx_user }} state=directory recurse=yes
   
   when: "'Successful' not in drupal_site_installed.stdout and drupal_site_install == true"
