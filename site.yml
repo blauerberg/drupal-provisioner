@@ -12,15 +12,15 @@
     - { role: selinux, tags: [ base ] }
     - { role: yum_cron, tags: [ base ] }
     - { role: firewalld, tags: [ base ] }
-    - { role: common, tags: [ base, app ] }
-    - { role: nginx, tags: [ app ] }
-    - { role: php-fpm, tags: [ app ] }
-    - { role: composer, tags: [ app ] }
-    - { role: mysql, tags: [ app ] }
-    - { role: drush, tags: [ app ] }
-    - { role: drupal, tags: [ app ] }
-    - { role: awscli, tags: [ base ] }
+    - { role: common, tags: [ base ] }
+    - { role: nginx, tags: [ base ] }
+    - { role: php-fpm, tags: [ base ] }
+    - { role: composer, tags: [ base ] }
+    - { role: mysql, tags: [ base ] }
+    - { role: drush, tags: [ base ] }
+    - { role: drupal, tags: [ base ] }
+    #- { role: awscli, tags: [ optional ] }
     #- { role: nodejs, tags: [ optional ] }
     #- { role: openjdk, tags: [ optional ] }
     #- { role: solr4drupal, tags: [ optional ] }
-    - { role: cron, tags: [ optional ] }
+    #- { role: cron, tags: [ optional ] }
